@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<div style="color:white; text-align:center; font-size:400%; padding:10px; background-color:#247BFB">TSM Monitoring Services</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>TSM | DB Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+{% extends 'navbar.html' %}
+
+{% block content %}
+<body>
+
+<script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.5.0.min.js">
+</script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js">
+</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script> $(document).ready(function() {
+    var table = $('#example').DataTable( {
+        "scrollY": "200px",
+        "paging": false
+    } );
+
+    $('a.toggle-vis').on( 'click', function (e) {
+        e.preventDefault();
+
+        // Get the column API object
+        var column = table.column( $(this).attr('data-column') );
+
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+    } );
+} );
+</script>
+<div class="container" style="width=device-width, initial-scale=1.0">
+        <table id="example" class="display" width="50%" align="center" style="font-size:150%">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Serial Req</th>
+            <th>Serial Trans</th>
+            <th>Clenght</th>
+            <th>XML Name</th>
+            <th>Binary Name</th>
+            <th>Chunk No</th>
+            <th>Date Inserted</th>
+            <th>Chunk Total</th>
+            <th>Target Version</th>
+            <th>Package Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if items %}
+            {% for item in items %}
+            <tr>
+                <td> {{item.id}} </td>
+                <td> {{item.ip}} </td>
+                <td> {{item.serial_req}} </td>
+                <td> {{item.serial_trans}} </td>
+                <td> {{item.clenght}} </td>
+                <td> {{item.xml_name}} </td>
+                <td> {{item.binary_name}} </td>
+                <td> {{item.chunk_no}} </td>
+                <td> {{item.date_inserted}} </td>
+                <td> {{item.chunk_total}} </td>
+                <td> {{item.target_version}} </td>
+                <td> {{item.package_type}} </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+    <div class="col-md-12">
+        <p>Listelenecek Veri Yok</p>
+    </div>
+    {% endif %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Serial Req</th>
+            <th>Serial Trans</th>
+            <th>Clenght</th>
+            <th>XML Name</th>
+            <th>Binary Name</th>
+            <th>Chunk No</th>
+            <th>Date Inserted</th>
+            <th>Chunk Total</th>
+            <th>Target Version</th>
+            <th>Package Type</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+</body>
+{% endblock %}
+</html>
