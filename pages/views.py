@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
+from . models import UpdateChunkRequests
 
 def index(request):
     return render(request, 'index.html')
@@ -25,3 +25,11 @@ def gmpMesajlari(request):
 
 def infoTable(request):
     return render(request, 'infoTable.html')
+
+
+def db_test(request):
+    items = UpdateChunkRequests.objects.all()
+    context = {
+        'items': items
+    }
+    return render(request, 'db_test.html', context=context)
