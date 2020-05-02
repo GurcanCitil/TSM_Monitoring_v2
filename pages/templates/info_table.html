@@ -12,10 +12,6 @@
 
 {% block content %}
 <body>
-
-<div style="font-size:150%; text-align:center; color:blue">
-    Toggle column: <a class="toggle-vis" data-column="0">Name</a> - <a class="toggle-vis" data-column="1">Position</a> - <a class="toggle-vis" data-column="2">Office</a> - <a class="toggle-vis" data-column="3">Age</a> - <a class="toggle-vis" data-column="4">Start date</a> - <a class="toggle-vis" data-column="5">Salary</a>
-</div>
 <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.5.0.min.js">
 </script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js">
@@ -24,7 +20,7 @@
 <script> $(document).ready(function() {
     var table = $('#example').DataTable( {
         "scrollY": "200px",
-        "paging": true
+        "paging": false
     } );
 
     $('a.toggle-vis').on( 'click', function (e) {
@@ -38,6 +34,10 @@
     } );
 } );
 </script>
+<div style="font-size:150%; text-align:center; color:blue">
+    Toggle column: <a class="toggle-vis" data-column="0">Name</a> - <a class="toggle-vis" data-column="1">Position</a> - <a class="toggle-vis" data-column="2">Office</a> - <a class="toggle-vis" data-column="3">Age</a> - <a class="toggle-vis" data-column="4">Start date</a> - <a class="toggle-vis" data-column="5">Salary</a>
+</div>
+
 <div class="container" style="width=device-width, initial-scale=1.0">
     <table id="example" class="display" width="50%" align="center" style="font-size:150%">
         <thead>
