@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from . models import UpdateChunkRequests
+from django import forms
 
 
 def index(request):

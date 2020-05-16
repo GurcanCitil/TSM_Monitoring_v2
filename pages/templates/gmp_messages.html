@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<div style="color:white; text-align:center; font-size:400%; padding:10px; background-color:#247BFB">TSM Monitoring Services</div>
-
+<div style="color:white; text-align:center; font-size:400%; padding:10px; background-color:#247BFB">TSM Monitoring
+    Services
+</div>
 <head>
     <meta charset="UTF-8">
     <title>TSM | GMP Messages</title>
@@ -12,39 +13,59 @@
 
 {% block content %}
 <body>
-
-<script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.5.0.min.js">
-</script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js">
-</script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="/static/js/msgType.js"></script>
+<script type="text/javascript" src="/static/js/table.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-<script> $(document).ready(function() {
-    var table = $('#example').DataTable( {
-        "scrollY": "200px",
-        "paging": false
-    } );
 
-    $('a.toggle-vis').on( 'click', function (e) {
-        e.preventDefault();
-
-        // Get the column API object
-        var column = table.column( $(this).attr('data-column') );
-
-        // Toggle the visibility
-        column.visible( ! column.visible() );
-    } );
-} );
-</script>
+<div id="content-wrap" class="clear" style="font-size:120%" align="center">
+    <!-- content -->
+    <div id="content">
+        <!-- main -->
+        <div id="main">
+            <div class="post">
+                <div class="right">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" name="startDate" id="startDate"/>
+                    <label for="endDate">End Date:</label>
+                    <input type="date" name="endDate" id="endDate"/>
+                    <label for="qsearch">Serial NO:</label>
+                    <input id="txtSearch" type="text" name="txtSearch"/>
+                    <label for="msgType">Message Type:</label>
+                    <select class="js-basic-multiple" name="msgType" multiple="multiple">
+                      <option value="FF8802">Parametre (FF8802)</option>
+                      <option value="FF887D">Ek Parametre (FF887D)</option>
+                      <option value="FF887F">Müşteri Bilgisi (FF887F)</option>
+                      <option value="FF887B">UPD Bilgisi (FF887B)</option>
+                      <option value="FF8803">Z Raporu (FF8803)</option>
+                      <option value="FF8879">Günlük Rapor (FF8879)</option>
+                      <option value="FF8813">Aylık Rapor (FF8813)</option>
+                      <option value="FF8804">Fiş Bilgileri (FF8804)</option>
+                      <option value="FF8806">Olay Kayıtları (FF8806)</option>
+                      <option value="FF8807">İstatistik (FF8807)</option>
+                    </select>
+                    <input type="submit" name="submit" id="submit" value="OK">
+                    <label for="qsearch">Distinct devices in the past month: <?php echo $number_of_distinct_devices_in_the_last_month ?></label>
+                    <div id="gmpMessages"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /main -->
+    </div>
+</div>
 <div class="container" style="width=device-width, initial-scale=1.0">
     <table id="example" class="display" width="50%" align="center" style="font-size:150%">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
+            <th>Date Received</th>
+            <th>Serial NO</th>
+            <th>Message Type</th>
+            <th>IP</th>
+            <th>Received Message</th>
+            <th>Sent Message</th>
         </tr>
         </thead>
         <tbody>

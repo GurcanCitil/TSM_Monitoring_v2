@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <div style="color:white; text-align:center; font-size:400%; padding:10px; background-color:#247BFB">TSM Monitoring Services</div>
-
 <head>
     <meta charset="UTF-8">
     <title>TSM | Device Info Table</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
 </head>
 {% extends 'navbar.html' %}
 
 {% block content %}
 <body>
-<script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.5.0.min.js">
-</script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js">
-</script>
+<script type="text/javascript" src="/static/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script> $(document).ready(function() {
     var table = $('#example').DataTable( {
@@ -26,10 +22,8 @@
     $('a.toggle-vis').on( 'click', function (e) {
         e.preventDefault();
 
-        // Get the column API object
         var column = table.column( $(this).attr('data-column') );
 
-        // Toggle the visibility
         column.visible( ! column.visible() );
     } );
 } );
