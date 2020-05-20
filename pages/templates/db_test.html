@@ -42,30 +42,18 @@
             <th>Serial Trans</th>
             <th>Clenght</th>
             <th>XML Name</th>
-            <th>Binary Name</th>
-            <th>Chunk No</th>
-            <th>Date Inserted</th>
-            <th>Chunk Total</th>
-            <th>Target Version</th>
-            <th>Package Type</th>
         </tr>
         </thead>
         <tbody>
         {% if items %}
             {% for item in items %}
             <tr>
+                <td> {{item.date_received}} </td>
+                <td> {{item.serial}} </td>
                 <td> {{item.id}} </td>
                 <td> {{item.ip}} </td>
-                <td> {{item.serial_req}} </td>
-                <td> {{item.serial_trans}} </td>
-                <td> {{item.clenght}} </td>
-                <td> {{item.xml_name}} </td>
-                <td> {{item.binary_name}} </td>
-                <td> {{item.chunk_no}} </td>
-                <td> {{item.date_inserted}} </td>
-                <td> {{item.chunk_total}} </td>
-                <td> {{item.target_version}} </td>
-                <td> {{item.package_type}} </td>
+                <td> {{item.msg_type}} </td>
+                <td> {{item.parsed_data}} </td>
             </tr>
             {% endfor %}
         {% else %}

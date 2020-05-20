@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from . models import UpdateChunkRequests
 from django import forms
-
+import requests
 
 def index(request):
     return render(request, 'index.html')
@@ -22,7 +22,12 @@ def export(request):
 
 
 def gmp_messages(request):
-    return render(request, 'gmp_messages.html')
+    response = requests.get('http://0.0.0.0:8091/gmp_messages')
+    gmp_results = response.json()
+    context = {
+        'items': gmp_results
+    }
+    return render(request, 'gmp_messages.html', context)
 
 
 def info_table(request):
@@ -30,8 +35,14 @@ def info_table(request):
 
 
 def db_test(request):
-    items = UpdateChunkRequests.objects.all()
+    # items = UpdateChunkRequests.objects.all()
+    # context = {
+    #     'items': items
+    # }
+    response = requests.get('http://0.0.0.0:8091/gmp_messages')
+    gmp_results = response.json()
     context = {
-        'items': items
+        'items': gmp_results
     }
-    return render(request, 'db_test.html', context=context)
+    print(gmp_results)
+    return render(request, 'db_test.html', context)
