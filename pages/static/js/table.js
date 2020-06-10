@@ -1,14 +1,16 @@
-$(document).ready(function() {
-    var table = $('#example').DataTable( {
-        "scrollY": "200px",
-        "paging": false
-    } );
+$('#example tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
 
-    $('a.toggle-vis').on( 'click', function (e) {
-        e.preventDefault();
-
-        var column = table.column( $(this).attr('data-column') );
-
-        column.visible( ! column.visible() );
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
     } );
 } );
